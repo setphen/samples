@@ -1,0 +1,56 @@
+{
+  "_base": "https://raw.githubusercontent.com/setphen/samples/main/",
+  "bd": [
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_808A1200.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Rubydub.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Digidap.wav"
+  ],
+  "sd": [
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Mamba.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Ritmo.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Reverz1.wav"
+  ],
+  "cp": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_Rubydub.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_LofiHuman.wav"
+  ],
+  "hh": [
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Magnotron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Ruflex.wav"
+  ],
+  "oh": [
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_AnalogOpenhatwav.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Rubydub.wav"
+  ],
+  "rim": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/RIM_Magnotron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/RIM_Rubydub.wav"
+  ],
+  "sh": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/SHAKE_AnalogShaker1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TAMB_TapeShake1.wav"
+  ],
+  "tom": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Ruflex.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Magnotron.wav"
+  ],
+  "conga": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CONGA_Syntique.wav"
+  ],
+  "clave": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAVE_Simple.wav"
+  ],
+  "cow": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/COW_Syntique.wav"
+  ],
+  "fx": [
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Briesherfst.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Sonar.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Quarkulator.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_NomiSpring.wav"
+  ]
+}
