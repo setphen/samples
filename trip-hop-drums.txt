@@ -25,63 +25,58 @@ const human = x => x.late(rand.range(-0.014, 0.014)).velocity(rand.range(0.82, 1
 //  LAYERS
 // =============================================================================
 
-// ---- RIDE : the jazz heart — classic spang-a-lang in swung 8ths -----------
+// ---- RIDE : steady swung-8th spang-a-lang, the groove on top of the pulse -
 // beat: 1  &  2  &  3  &  4  &   ->   x .  x  x  .  x  x  .
-// heavy swing on the 8th grid gives the triplet shuffle. cym bank has 5 rides.
+// continuous and consistent (no thinning). cym bank has 5 rides.
 const ridePick = "<0!8 2!8 1!8 4!8 3!8>"
 
 ride$:
   human(
     s("cym*8")
       .n(ridePick)
-      .struct("<[x ~ x x ~ x x ~]!3 [x ~ x x ~ x ~ x]>") // last bar lifts the "& of 4"
-      .swingBy("<0.62 0.66 0.6 0.7>", 8)                 // strong, breathing shuffle
+      .struct("[x ~ x x ~ x x ~]")
+      .swingBy("<0.62 0.66 0.6 0.7>", 8)     // strong, breathing triplet shuffle
       .gain(0.34)
       .pan(0.55)
-      .someCyclesBy(0.2, x => x.degradeBy(0.15))         // a dropped stroke now & then
   )
 
-// ride bell accent on 1 (and the "and of 3" sometimes) for the bell pattern
+// ride bell accent on beat 1 for the bell pattern
 bell$:
   human(
     s("bell:1")
-      .struct("x ~ ~ ~ ~ ~ ~ ~ ~ ~ x? ~ ~ ~ ~ ~")
-      .mask("<1 0 1 1>/4")
-      .gain(0.18).pan(0.62).room(0.2)
-      .lpf(5000)
+      .struct("x ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+      .gain(0.18).pan(0.62).room(0.2).lpf(5000)
   )
 
-// ---- KICK : syncopated, walking-ish, groovy, not four-on-the-floor --------
-// kicks on 1, the "&-ish of 2", and 3 — with swing it sits behind the pocket.
-// bd has 33 samples; rotates on staggered 4-8 bar holds.
+// ---- KICK : a steady pulse — four-on-the-floor, the anchor -------------
+// one kick every beat. minimal swing so it stays solid while everything
+// else shuffles around it. bd has 33 samples; rotates on 4-8 bar holds.
 const kickPick = "<0!6 3!4 10!5 1!8 7!4 20!6 14!5 2!7>"
 
 kick$:
   human(
-    s("bd ~ ~ ~ ~ bd ~ ~ bd ~ ~ ~ ~ ~ ~ ~")
+    s("bd bd bd bd")
       .n(kickPick)
-      .swingBy("<0.6 0.66 0.58 0.7>", 8)
-      .gain(0.9)
+      .swingBy("<0.52 0.54 0.5 0.56>", 4)        // very light — keep it a pulse
+      .gain(0.92)
       .room(0.06)
       .lpf(160)                                  // keep sub, trim click
-      .someCyclesBy(0.25, x => x.speed(0.97))     // occasionally detune down
+      .someCyclesBy(0.2, x => x.speed(0.97))      // occasionally detune down
   )
 
-// ---- SNARE : side-stick backbeat + ghosted brush strokes -------------------
-// rim (side-stick) on 2 & 4, soft sd ghosts on the off-8ths, occasionally
-// thinned. sd has 45 samples; rotates on its own offset schedule.
+// ---- SNARE : locked to 2 & 4, plus a light ghost on the "& of 4" ---------
+// rim (side-stick) layered under the snare for body. sd has 45 samples;
+// rotates on its own offset schedule. Solid backbeat — no thinning.
 const snarePick = "<0!4 8!6 2!5 17!4 30!7 5!4 22!6 11!5>"
 
 snare$:
   human(
     stack(
-      s("rim ~ ~ ~ rim ~ ~ ~").n("<0!8 1!8 2!8>").gain(0.5).room(0.15).pan(0.4),
-      s("~ ~ sd? ~ ~ ~ sd? ~ ~ ~ sd? ~ sd? ~ sd?") // ghost brush on off-8ths
-        .n(snarePick)
-        .gain(0.16).room(0.1).lpf(4000)
+      s("~ sd ~ sd").n(snarePick).gain(0.8).room(0.25),         // backbeat 2 & 4
+      s("~ rim ~ ~").n("<0!8 1!8 2!8>").gain(0.3).room(0.15).pan(0.4), // side-stick layer
+      s("~ ~ ~ ~ ~ ~ ~ sd?").gain(0.14).lpf(4000)               // ghost on "& of 4"
     )
-      .swingBy(0.66, 8)
-      .someCyclesBy(0.15, x => x.struct("~ ~ x ~ ~ ~ x ~"))  // occasional drop
+      .swingBy(0.62, 4)                                         // backbeat swings with the ride
   )
 
 // ---- SHAKER / TAMB : brushed, steady, low, the lounge glue ---------------
@@ -95,19 +90,18 @@ shake$:
       .lpf(5500)
   )
 
-// ---- PERCUSSION COLOR : sparse conga / clave, very low density ------------
+// ---- PERCUSSION COLOR : sparse conga / clave built around the backbeat ---
 perc$:
   human(
     stack(
-      s("<conga ~ ~ ~ ~ conga:0 ~ ~>")            // slow conga pulse
-        .gain(0.32).room(0.2).pan(0.3)
-        .slow(2),
+      s("~ ~ conga ~ ~ ~ conga:0 ~")             // conga on the off-beats
+        .gain(0.3).room(0.2).pan(0.3),
       s("clave ~ ~ ~ ~ ~ ~ ~")
         .mask("<1 0 0 1>/4")                      // clave accents bars 1 & 4
-        .gain(0.24).pan(0.75)
+        .gain(0.22).pan(0.75)
         .sometimes(x => x.speed(0.98))
     )
-      .swingBy(0.58, 8)
+      .swingBy(0.6, 8)
   )
 
 // ---- TOM : a single low tom drop, very rarely (the one fill-ish thing) -----
@@ -150,6 +144,8 @@ all(x => x.distort(0.06).lpf(sine.slow(16).range(1100, 5000)).late(0.003))
 // TEMPO   : setcpm(76/4) -> setcpm(70/4) for slower, setcpm(82/4) to push it.
 // SWING   : raise the ride swingBy offsets (<0.62 0.66 0.6 0.7>) toward 0.75
 //           for a heavier triplet shuffle, down toward 0.5 for straighter 8ths.
+// KICK    : "bd bd bd bd" = four-on-the-floor. For a half-time pulse use "bd ~ bd ~";
+//           keep kick swing low so it stays an anchor.
 // SWAP    : edit ridePick / kickPick / snarePick — the !N holds are bar counts;
 //           indices wrap, so any number works (cym 5, bd 33, sd 45...).
 // DENSITY : edit the .struct masks in ride$ / snare$ / perc$ to thin/thicken.
