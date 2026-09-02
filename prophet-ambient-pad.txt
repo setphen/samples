@@ -13,6 +13,9 @@
 // =============================================================================
 
 samples('github:setphen/samples')
+// NOTE: if the manifest ever silently fails to update (browser caches strudel.json),
+// swap the line above for the explicit cache-busted URL:
+//   samples('https://raw.githubusercontent.com/setphen/samples/main/strudel.json?v=2')
 
 // ~40 bpm, 4/4 -> 1 cycle = 1 bar = ~6s. slow(2) => each chord held 2 bars (12s).
 setcpm(40/4)
