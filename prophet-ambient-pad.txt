@@ -1,0 +1,117 @@
+// =============================================================================
+//  "prophet ambient" — evolving slow ambient pad progression for strudel.cc
+//  Paste this whole block into https://strudel.cc and hit play.
+//  Loads the Legowelt Prophet 600 pack (pads/strings/bass/fx) via the github:
+//  shortcut — reads strudel.json at the repo root. First loop may be silent
+//  while samples lazy-load; let it run.
+//
+//  Vibe: ~40 BPM, a slow 4-chord bass progression (Cm - Fm - Eb - G) defines
+//  the harmony; evolving pad timbres drift in/out of phase around it, a
+//  sustained string line floats on top, and occasional fx sweeps add motion.
+//  Big washed reverb, slow filter + amplitude breathing, micro detune drift.
+//  No drums. Tweak the KNOBS block at the bottom to mutate it live.
+// =============================================================================
+
+samples('github:setphen/samples')
+
+// ~40 bpm, 4/4 -> 1 cycle = 1 bar = ~6s. slow(2) => each chord held 2 bars (12s).
+setcpm(40/4)
+
+// 4-chord progression (roots): Cm - Fm - Eb - G. bass notes define the harmony;
+// the pads/strings colour around them. 4 steps * slow(2) = 8-bar loop.
+const prog    = "<c2 f2 eb2 g2>"
+const melody  = "<c4 eb4 g4 f4>"        // string line following the changes
+// pad timbre drifts on its own 16-bar cycle (8 samples, 2 bars each) so the
+// texture keeps evolving while the harmony loops every 8 bars.
+const padPick = "<0 12 7 30 20 5 18 3>"
+
+// =============================================================================
+//  LAYERS
+// =============================================================================
+
+// ---- BASS : slow root drone, anchors the harmony --------------------------
+bass$:
+  note(prog).s("bass")
+    .slow(2)
+    .clip(1)
+    .gain(0.5)
+    .lpf(170)
+    .room(0.2)
+    .pan(0.5)
+    .speed(sine.slow(32).range(0.99, 1.01))   // micro detune drift
+
+// ---- PAD A : evolving timbre, big reverb, slow filter + gain breathing ----
+// pad samples (45) loop for continuous sustain; filter and gain swell slowly.
+pad$:
+  s("pad").n(padPick)
+    .slow(2)
+    .loop(1)
+    .gain(sine.slow(16).range(0.28, 0.5))      // slow amplitude swell
+    .room(0.85).roomsize(0.95)
+    .lpf(sine.slow(16).range(500, 3000))       // slow filter breathing
+    .pan(0.5)
+    .speed(sine.slow(32).range(0.99, 1.01))    // micro detune drift
+
+// ---- PAD B : detuned, panned wide, phaser — stereo width + evolution ------
+pad2$:
+  s("pad").n(padPick)
+    .slow(2)
+    .late(0.05)
+    .speed(1.006)                              // fixed slight detune vs pad A
+    .loop(1)
+    .gain(sine.slow(16).range(0.22, 0.42))
+    .room(0.85)
+    .lpf(sine.slow(16).range(450, 2800))
+    .pan(0.5)
+    .phaser(0.4)
+
+// ---- STRING : slow sustained melodic line over the progression ------------
+string$:
+  note(melody).s("string")
+    .slow(2)
+    .loop(1)
+    .gain(0.28)
+    .room(0.7).roomsize(0.8)
+    .lpf(sine.slow(8).range(700, 2200))
+    .pan(0.4)
+    .delay(0.3).delaytime(0.5)
+
+// ---- FX SWEEP : occasional evolving texture, very slow, low ---------------
+// one bed every 8 bars, washed, panned by a slow LFO.
+fx$:
+  s("<pfx:0 pfx:12 pfx:30 pfx:7>")
+    .slow(8)
+    .gain(0.12)
+    .room(0.9)
+    .lpf(sine.slow(16).range(300, 1800))
+    .pan(sine.slow(8).range(0.2, 0.8))
+    .clip(8)                                   // let tails ring out
+
+// ---- a faint high shimmer from a synth sample, very rare -------------------
+shimmer$:
+  note("<c5 g5 eb5 f5>").s("synth")
+    .slow(8)
+    .loop(1)
+    .gain(0.06)
+    .room(0.9)
+    .lpf(4000)
+    .pan(sine.slow(8).range(0.3, 0.7))
+
+// =============================================================================
+//  GLOBAL TREATMENT
+// =============================================================================
+// warm, dark, breathing: gentle saturation + a very slow master lowpass so
+// the whole thing slowly opens and closes like a room inhaling.
+all(x => x.distort(0.04).lpf(sine.slow(32).range(800, 4000)).gain(0.9))
+
+// =============================================================================
+//  KNOBS — edit these to mutate the patch live
+// =============================================================================
+// TEMPO    : setcpm(40/4) -> setcpm(34/4) for slower/deeper, setcpm(48/4) to move.
+// HARMONY  : edit prog / melody — change the root notes (c2 f2 eb2 g2 / c4 eb4 g4 f4).
+// PADS     : edit padPick (8 indices; pad has 45 samples, indices wrap) to pick
+//            different pad timbres, or shorten to 4 to lock pads to the chords.
+// DENSITY  : remove a $: line to thin it out; add more fx indices for more motion.
+// BREATHE  : change the .range() on the lpf/gain sine.slow(...) sweeps — larger
+//            range = more open/closed movement; faster .slow(N) = quicker swell.
+// ATMOS    : raise room/roomsize for a bigger hall; lower for drier/closer.
