@@ -1,56 +1,269 @@
 {
   "_base": "https://raw.githubusercontent.com/setphen/samples/main/",
   "bd": [
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BB_Electro1short.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD%20Drumaxia%20wav.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD%20Pufsub.wav",
     "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_808A1200.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_DiggerLong.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Digidap.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Digimozzy.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Dikkie.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Dome%20Long.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_EchoRam1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_EchoRam2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Electro1shorter.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Juxtapos.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Lite2021.wav",
     "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Losamplix.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Magnotron..wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Matrixtape1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Matrixtape2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Plastiklog.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Punchtron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Punchysplur.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Pziforze.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Ritmo.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Romkick1.wav",
     "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Rubydub.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Digidap.wav"
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Ruflex.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Simpletron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Springworth.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Spriverbion.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Stuf.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_SubThud.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD_Zistort.wav"
   ],
   "sd": [
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_808A1200.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Analog%20Noise%202.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Analog%20Noise%204.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Analog%20Noise%205.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Analog%20Noise1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_CompuCrunchy.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Digidap.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Draconis1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Draconis2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Drumaxia.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Echoram1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Echoram2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Echoram3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Hark.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Juxtapos.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Kitcatlitter.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_LoDigital%201.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_LoDigital%202.wav",
     "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Magnotron.wav",
     "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Mamba.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Mambalazesnare.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Mambalazesnare2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_NomiSnare.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_NomiSnareLazer.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_NomiSnareWhip.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Punchtron..wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Reverz1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Reverz2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Reverz3.wav",
     "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Ritmo.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Reverz1.wav"
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Rubydubwav.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Ruflex.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Strakker.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Turbosound.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolf%203.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolf%205.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolf%206.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolf%207.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolf%208.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolf%209.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolf1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolf2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_Wolfsweep1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Snaredrums/SD_electro7000.wav"
   ],
-  "cp": [
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_Rubydub.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_LofiHuman.wav"
-  ],
-  "hh": [
+  "ch": [
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Digidap.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_DistortedRitmo.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_DraconisD921.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_DraconisD922.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Fantio%20Closed%20Hat.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Filtix%20Closed%20Hat.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Juxtapos.wav",
     "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_LofiHuman.wav",
     "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Magnotron.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Ruflex.wav"
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Punchtron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Rezmatix%20Closed%20Hat.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Rubydub.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Ruflex.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CH_Sizzel%20Closed%20Hat.wav"
   ],
   "oh": [
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_AnalogHihat1.wav",
     "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_AnalogOpenhatwav.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Rubydub.wav"
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_AnalogVeryLongHat.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Digidap.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_DistortedRitmo.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_DraconisD921.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_DraconisD922.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Drumaxia.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Fantio%20Open%20Hat.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Filtix%20Open%20Hat.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Juxtapos.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Magnotron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Punchtron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Rezmatix%20Open%20Hat%20Long.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Rezmatix%20Open%20Hat.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Rubydub.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Ruflex.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/OH_Sizzel%20Open%20Hat.wav"
   ],
-  "rim": [
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/RIM_Magnotron.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/RIM_Rubydub.wav"
+  "cym": [
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CYM_Juxtapos.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CYM_Magnotron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CYM_Punchtron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CYM_Ruflex.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Hihats/CYM_Synthique.wav"
   ],
-  "sh": [
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/SHAKE_AnalogShaker1.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/TAMB_TapeShake1.wav"
-  ],
-  "tom": [
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_LofiHuman.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Ruflex.wav",
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Magnotron.wav"
-  ],
-  "conga": [
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/CONGA_Syntique.wav"
+  "clap": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_Juxtapos.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_Magnotron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_Punchtron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_Rubydub.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAP_Ruflex.wav"
   ],
   "clave": [
-    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAVE_Simple.wav"
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAVE_Punchtron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAVE_Simple.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAVE_Singalique.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CLAVE_Syntheticblox.wav"
+  ],
+  "conga": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CONGA_Lowpark.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/CONGA_Syntique.wav"
   ],
   "cow": [
     "Legowelt%20Drumnibus%20Samplepack/Percussion/COW_Syntique.wav"
   ],
+  "bongo": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/BONGO_Ryhtmbox.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/BONGO_Ryhtmbox2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/BONGO_Simple.wav"
+  ],
+  "bell": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/BELL_Darkgong.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/BELL_Filterbell.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/BELL_Hypnoschaal.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/BELL_Hypnoschaal2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/BELL_Hypnoschaal3.wav"
+  ],
+  "rim": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/RIM_Losimple.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/RIM_Magnotron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/RIM_Rubydub.wav"
+  ],
+  "shake": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/SHAKE_AnalogShaker1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/SHAKE_AnalogShaker2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/SHAKE_AnalogShaker3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/SHAKE_Ritmo.wav"
+  ],
+  "snap": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/SNAP_Juxtapos.wav"
+  ],
+  "tabla": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TABLA_Mamba.wav"
+  ],
+  "tamb": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TAMB_Tamb%26Shaker.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TAMB_TapeShake1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TAMB_TapeShake2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TAMB_TapeShake3.wav"
+  ],
+  "tom": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_DistortedRitmo.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_DistortedRitmoHi.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_DraconisDS92.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_DraconisDS92high.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Druimaxia.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Juxtapos.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Magnotron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Osciaz.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Punchtron.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Rubydub.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Ruflex.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Stofelectro1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_TamborineTom.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_TamborineTom2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_TamborineTom3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_Warped.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/TOM_digger.wav"
+  ],
+  "laz": [
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Blip1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Blip2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Blip3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Chewy1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Digidap.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Lectrophy.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Lectrophy2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Mambalazesnare.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_R900.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Softrond.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Softrond2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_Softrond3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_lowvix1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_lowvix2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/Percussion/LAZ_lowvix3.wav"
+  ],
   "fx": [
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_AnalogFX1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_AnalogFX2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Blarper.wav",
     "Legowelt%20Drumnibus%20Samplepack/FX/FX_Briesherfst.wav",
-    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Sonar.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Briesherfst2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Briesherfst3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Burst1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Burst2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Chainmalz.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Digidap2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Digidap3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Drumaxia.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Drumaxia2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_ElectroIsland.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_ElectroIsland2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Emerx1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Emerx2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Emerx3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_LofiHuman.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_LofiHuman2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Magstorm1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Magstorm2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_NomiElastiek.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_NomiLaser1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_NomiLectric.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_NomiLectric2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_NomiSnip.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_NomiSpring.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Poni1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Poni2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Poni3.wav",
     "Legowelt%20Drumnibus%20Samplepack/FX/FX_Quarkulator.wav",
-    "Legowelt%20Drumnibus%20Samplepack/FX/FX_NomiSpring.wav"
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Quarkulator2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Sloiz.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Snakamon1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Snakamon2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Snakamon3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Snakamon3B.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Snakamon5.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Sonar.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Sonar2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Sydrum1.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Sydrum2.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Sydrum3.wav",
+    "Legowelt%20Drumnibus%20Samplepack/FX/FX_Timpio.wav"
   ]
 }
