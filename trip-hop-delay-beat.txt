@@ -1,0 +1,59 @@
+// =============================================================================
+//  "trip-hop delay beat" — a minimal 3-sound beat with a quiet, side-chained
+//  filter+delay bus. Paste into https://strudel.cc and hit play.
+//  Loads your Drumnibus pack via the github: shortcut (reads strudel.json).
+//  First loop may be silent while samples lazy-load — let it run.
+//
+//  Idea: start dead simple — one LOW (kick), one MID (snare), one HIGH (hat).
+//  Then a single extra layer copies the whole beat, low-passes it, runs it
+//  through a delay, keeps it quiet, and side-chain ducks it on every kick
+//  so the echoes bloom in the gaps and get out of the way when the kick hits.
+// =============================================================================
+
+samples('github:setphen/samples')
+
+setcpm(84/4)                       // ~84 bpm, 4/4
+
+// --- the beat: three sounds, low / mid / high ------------------------------
+const low  = s("bd ~ ~ ~ bd ~ ~ ~")   // kick on beats 1 and 3
+const mid  = s("~ ~ sd ~ ~ ~ sd ~")   // snare on beats 2 and 4
+const high = s("hh*8")                // closed hats on the 8ths
+const beat = stack(low, mid, high)
+
+// dry beat — clean and up front
+beat$:
+  beat
+    .gain(0.8)
+    .room(0.08)
+
+// --- the filter + delay bus -------------------------------------------------
+// same beat, but: low-passed (with a slow moving cutoff), fed into a delay,
+// kept quiet, and side-chain ducked — the gain pattern dips to ~0.1 exactly
+// where the kicks land (steps 0 and 4 of the 8-step bar) and recovers, so the
+// echoes only bloom in the spaces between kicks.
+delay$:
+  beat
+    .delay(0.6)                                   // delay send amount
+    .delaytime(0.25)                              // quarter-note echoes
+    .delayfeedback(0.4)                           // a few repeats
+    .lpf(sine.slow(8).range(500, 2000))           // gentle filter movement
+    .hpf(180)                                     // trim muddy low end in the echo
+    .gain("<[0.1 0.35 0.5 0.45 0.1 0.35 0.5 0.45]>") // sidechain: duck on kicks
+    .pan(0.6)                                     // echoed off to the right
+    .room(0.4)
+
+// a hair of global timing glue
+all(x => x.late(0.003))
+
+// =============================================================================
+//  KNOBS
+// =============================================================================
+// BEAT     : edit low/mid/high — e.g. low = "bd ~ ~ ~ ~ bd ~ ~" for a busier kick,
+//            high = "hh*16" for denser hats.
+// DELAY    : delaytime (0.25 = quarter, 0.375 = dotted 8th, 0.125 = 8th),
+//            delayfeedback (more = longer tail), delay (send level).
+// FILTER   : the lpf .range(500,2000) — widen for more open/closed movement;
+//            slow(8) -> slow(16) for a slower sweep.
+// SIDECHAIN: the gain pattern — lower the 0.1 dips for deeper pumping,
+//            raise the 0.45/0.5 peaks for louder echoes.
+// TEMPO    : setcpm(84/4) -> setcpm(78/4) for a saggier pocket.
