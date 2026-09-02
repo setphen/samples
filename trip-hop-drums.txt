@@ -1,161 +1,156 @@
 // =============================================================================
-//  "drumnibus pocket" — a trip-hop drum generator for strudel.cc
+//  "drumnibus lounge" — downtempo jazz-fusion-lounge drum generator for strudel
 //  Paste this whole block into https://strudel.cc and hit play.
-//  Loads your FULL Legowelt Drumnibus pack from the github mirror via the
-//  github: shortcut (it reads strudel.json at the repo root — every
-//  bd/sd/hat/perc/fx in the pack is indexed, so :n / .n() can roam).
-//  First loop may be silent while samples lazy-load — let it run.
+//  Loads your FULL Legowelt Drumnibus pack via the github: shortcut (reads
+//  strudel.json at the repo root — every bd/sd/hat/cym/perc/fx is indexed, so
+//  :n / .n() can roam). First loop may be silent while samples lazy-load.
 //
-//  Form: the beat holds for 4-8 bars, then 1-2 kit pieces swap out and it
-//  keeps going. The skeleton (kick/snare/hat placement) never changes —
-//  only the sample picks rotate, on staggered irregular holds so it never
-//  feels looped. ~84 BPM, behind-the-grid pocket, dusty, atmospheric.
+//  Vibe: ~76 BPM, deep triplet-shuffle pocket, swung ride, syncopated kick,
+//  side-stick + ghosted snare, brushed shaker, warm washed atmosphere.
+//  Form: the beat holds 4-8 bars, then 1-2 kit pieces swap out and it keeps
+//  going. Skeleton stays constant — only the sample picks rotate.
 //  Tweak the KNOBS block at the bottom to mutate it live.
 // =============================================================================
 
 samples('github:setphen/samples')
 
-// 84 bpm in 4/4 -> setcpm(bpm / beats-per-cycle)
-setcpm(84/4)
+// 76 bpm in 4/4 -> setcpm(bpm / beats-per-cycle). Saggier than the 84 pocket.
+setcpm(76/4)
 
 // shared humanization: tiny random timing + velocity flutter (multiplies gain,
-// so it won't clobber the mix gains set below) so it never grids out
-const human = x => x.late(rand.range(-0.012, 0.012)).velocity(rand.range(0.85, 1))
+// so it won't clobber the mix gains below) so it never grids out
+const human = x => x.late(rand.range(-0.014, 0.014)).velocity(rand.range(0.82, 1))
 
 // =============================================================================
 //  LAYERS
 // =============================================================================
 
-// ---- KICK : loose, behind-the-pocket, swinging -----------------------------
-// kicks 1 and 3 land, an extra one on the "a" of 3 every other bar.
-// swing pulled toward the back half of each beat.
-// kick sample rotates on staggered 4-8 bar holds (bd has 33 samples).
-// <a!N b!M ...> holds each index for that many cycles (bars). Edit the
-// numbers / indices to change how often and to which kick it switches.
+// ---- RIDE : the jazz heart — classic spang-a-lang in swung 8ths -----------
+// beat: 1  &  2  &  3  &  4  &   ->   x .  x  x  .  x  x  .
+// heavy swing on the 8th grid gives the triplet shuffle. cym bank has 5 rides.
+const ridePick = "<0!8 2!8 1!8 4!8 3!8>"
+
+ride$:
+  human(
+    s("cym*8")
+      .n(ridePick)
+      .struct("<[x ~ x x ~ x x ~]!3 [x ~ x x ~ x ~ x]>") // last bar lifts the "& of 4"
+      .swingBy("<0.62 0.66 0.6 0.7>", 8)                 // strong, breathing shuffle
+      .gain(0.34)
+      .pan(0.55)
+      .someCyclesBy(0.2, x => x.degradeBy(0.15))         // a dropped stroke now & then
+  )
+
+// ride bell accent on 1 (and the "and of 3" sometimes) for the bell pattern
+bell$:
+  human(
+    s("bell:1")
+      .struct("x ~ ~ ~ ~ ~ ~ ~ ~ ~ x? ~ ~ ~ ~ ~")
+      .mask("<1 0 1 1>/4")
+      .gain(0.18).pan(0.62).room(0.2)
+      .lpf(5000)
+  )
+
+// ---- KICK : syncopated, walking-ish, groovy, not four-on-the-floor --------
+// kicks on 1, the "&-ish of 2", and 3 — with swing it sits behind the pocket.
+// bd has 33 samples; rotates on staggered 4-8 bar holds.
 const kickPick = "<0!6 3!4 10!5 1!8 7!4 20!6 14!5 2!7>"
 
 kick$:
   human(
-    s("bd ~ ~ bd ~ ~ <~ bd:1> ~")
+    s("bd ~ ~ ~ ~ bd ~ ~ bd ~ ~ ~ ~ ~ ~ ~")
       .n(kickPick)
-      .swingBy("<0.55 0.6 0.5 0.62>", 4)        // swing amount drifts per bar
+      .swingBy("<0.6 0.66 0.58 0.7>", 8)
       .gain(0.9)
-      .room(0.08)                                // just a hair of room on the kick
-      .lpf(180)                                  // keep sub, trim click
-      .someCyclesBy(0.25, x => x.speed(0.97))    // occasionally detune down
+      .room(0.06)
+      .lpf(160)                                  // keep sub, trim click
+      .someCyclesBy(0.25, x => x.speed(0.97))     // occasionally detune down
   )
 
-// ---- SNARE / CLAP : backbeat, dusty, ghosted -------------------------------
-// backbeat on 2 & 4, clap layered underneath for body, a soft rim ghost on
-// the "e" of 1 once in a while. almost no fills.
-// snare sample rotates on its own staggered schedule (sd has 45 samples),
-// offset from the kick so the kit evolves in layers rather than all at once.
+// ---- SNARE : side-stick backbeat + ghosted brush strokes -------------------
+// rim (side-stick) on 2 & 4, soft sd ghosts on the off-8ths, occasionally
+// thinned. sd has 45 samples; rotates on its own offset schedule.
 const snarePick = "<0!4 8!6 2!5 17!4 30!7 5!4 22!6 11!5>"
 
 snare$:
   human(
     stack(
-      s("~ sd ~ sd").n(snarePick).gain(0.8).room(0.25),      // 2 and 4
-      s("~ cp ~ ~").gain(0.35).room(0.3).late(0.004),        // clap tail underneath
-      s("rim:1 ~ ~ ~ ~ ~ ~ ~").gain(0.25)                    // rare ghost
+      s("rim ~ ~ ~ rim ~ ~ ~").n("<0!8 1!8 2!8>").gain(0.5).room(0.15).pan(0.4),
+      s("~ ~ sd? ~ ~ ~ sd? ~ ~ ~ sd? ~ sd? ~ sd?") // ghost brush on off-8ths
+        .n(snarePick)
+        .gain(0.16).room(0.1).lpf(4000)
     )
-      .swingBy(0.5, 4)
-      .someCyclesBy(0.15, x => x.struct("~ ~ x ~ ~ ~ x ~")) // occasional skip
+      .swingBy(0.66, 8)
+      .someCyclesBy(0.15, x => x.struct("~ ~ x ~ ~ ~ x ~"))  // occasional drop
   )
 
-// ---- HATS : the main swing surface, density varies per bar -----------------
-// closed hats at 8ths with a per-bar density mask; open hat on the "and" of 4
-// every 4 bars to lift the turn. swing here is the strongest.
-// closed-hat sample swaps slowly (every 8 bars) — the occasional 2nd piece.
-const hatPick = "<0!8 2!8 1!8 3!8 5!8>"
-
-hat$:
-  human(
-    stack(
-      s("hh*8")
-        .n(hatPick)
-        .struct("<[x ~ x ~ x ~ x ~] [x ~ x x ~ x ~ x] [x ~ x ~ x x ~ ~] [x x ~ x ~ x ~ x]>")
-        .swingBy("<0.6 0.66 0.55 0.7>", 8)      // hats swing hardest + vary
-        .gain(0.32)
-        .someCyclesBy(0.2, x => x.degradeBy(0.3))// thin out some bars
-        .someCyclesBy(0.3, x => x.speed(1.02)),  // brighten some bars
-      s("~ ~ ~ ~ ~ ~ ~ oh:1")
-        .mask("<0!3 1>/4")                       // open hat only on bar 4 of 4
-        .gain(0.3)
-        .cut(1)                                  // choke it with the next hh
-    )
-  )
-
-// ---- SHAKER / TAMB : continuous texture, very steady, low ------------------
-// the glue that holds the pocket together without adding density.
+// ---- SHAKER / TAMB : brushed, steady, low, the lounge glue ---------------
 shake$:
   human(
     s("sh*16")
-      .gain("<0.12 0.14 0.1 0.13>")
-      .pan(sine.segment(16).range(0.35, 0.65))   // gentle L/R sway
-      .swingBy(0.58, 16)
-      .lpf(6000)
+      .n("<0!16 1!16>")
+      .gain("<0.1 0.12 0.09 0.11>")
+      .pan(sine.segment(16).range(0.4, 0.6))       // gentle L/R sway
+      .swingBy(0.6, 16)
+      .lpf(5500)
   )
 
-// ---- PERCUSSION COLOR : sparse conga / clave / cow hits --------------------
-// very low density, just to give the pattern character & space.
+// ---- PERCUSSION COLOR : sparse conga / clave, very low density ------------
 perc$:
   human(
     stack(
-      s("<conga ~ ~ ~ ~ conga:0 ~ ~>")           // slow conga pulse
-        .gain(0.4).room(0.2).pan(0.3)
+      s("<conga ~ ~ ~ ~ conga:0 ~ ~>")            // slow conga pulse
+        .gain(0.32).room(0.2).pan(0.3)
         .slow(2),
       s("clave ~ ~ ~ ~ ~ ~ ~")
-        .mask("<1 0 0 1>/4")                     // clave accents bars 1 & 4
-        .gain(0.3).pan(0.75)
-        .sometimes(x => x.speed(0.98)),
-      s("cow ~ ~ ~")
-        .mask("<0!3 1>/4")                       // cow only on bar 4
-        .gain(0.25).pan(0.6)
+        .mask("<1 0 0 1>/4")                      // clave accents bars 1 & 4
+        .gain(0.24).pan(0.75)
+        .sometimes(x => x.speed(0.98))
     )
-      .swingBy(0.55, 4)
+      .swingBy(0.58, 8)
   )
 
 // ---- TOM : a single low tom drop, very rarely (the one fill-ish thing) -----
 tom$:
   human(
     s("tom:1")
-      .mask("<0!15 1>")                          // once every 16 bars
-      .gain(0.6).room(0.35)
-      .speed(0.9)
+      .mask("<0!15 1>")                           // once every 16 bars
+      .gain(0.55).room(0.3)
+      .speed(0.92)
   )
 
-// ---- ATMOSPHERE : long fx beds, washed, panned wide, super slow ----------
-// this is where the room lives. one long sweep per ~8 bars.
+// ---- ATMOSPHERE : long washed fx beds, warm, panned wide, super slow ------
+// the room of the lounge. one bed per 8 bars, slow filter breathing.
 atmos$:
   s("<fx:0 fx:1 fx:2 fx:3>")
-    .slow(8)                                   // 8-bar beds
-    .gain(0.18)
+    .slow(8)
+    .gain(0.16)
     .room(0.7).roomsize(0.6)
-    .lpf(sine.slow(8).range(400, 2500))        // slow filter breathing
+    .lpf(sine.slow(8).range(300, 1800))           // warmer, lower than the pocket ver
     .pan(sine.slow(8).range(0.2, 0.8))
-    .clip(4)                                   // let tails ring out
+    .clip(4)
 
-// ---- a faint noise floor for age -------------------------------------------
+// ---- a faint noise floor for vinyl age --------------------------------------
 dust$:
-  s("misc")                                    // strudel's default noise hit
+  s("misc")
     .slow(2)
-    .gain(0.02)
-    .sometimesBy(0.05, x => x.gain(0.05))
+    .gain(0.018)
+    .sometimesBy(0.05, x => x.gain(0.04))
 
 // =============================================================================
 //  GLOBAL TREATMENT
 // =============================================================================
-// glue: a touch of saturation + a gently breathing lowpass over everything
-// so the whole kit sits in one room.
-all(x => x.distort(0.08).lpf(sine.slow(16).range(1200, 6000)).late(0.003))
+// glue: gentle saturation + a slowly breathing lowpass so the whole kit
+// lives in one warm, slightly dim room.
+all(x => x.distort(0.06).lpf(sine.slow(16).range(1100, 5000)).late(0.003))
 
 // =============================================================================
 //  KNOBS — edit these to mutate the patch live
 // =============================================================================
-// SWAP    : edit kickPick / snarePick / hatPick — the !N holds are bar counts.
-//           indices wrap, so any number works (bd has 33, sd 45, ch 14...).
-// SWING   : raise the per-bar swing ranges above for more/less shuffle.
-// DENSITY : edit the .struct masks in hat$ / perc$ to thin or thicken.
+// TEMPO   : setcpm(76/4) -> setcpm(70/4) for slower, setcpm(82/4) to push it.
+// SWING   : raise the ride swingBy offsets (<0.62 0.66 0.6 0.7>) toward 0.75
+//           for a heavier triplet shuffle, down toward 0.5 for straighter 8ths.
+// SWAP    : edit ridePick / kickPick / snarePick — the !N holds are bar counts;
+//           indices wrap, so any number works (cym 5, bd 33, sd 45...).
+// DENSITY : edit the .struct masks in ride$ / snare$ / perc$ to thin/thicken.
 // ATMOS   : change atmos$.slow(8) to .slow(4) for more sweeps, gain for level.
-// TEMPO   : setcpm(84/4) -> e.g. setcpm(78/4) for a slower, saggier pocket.
