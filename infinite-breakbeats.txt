@@ -8,9 +8,11 @@
 //  repeats → the patch is effectively aperiodic.
 //
 //  SAMPLE: Breaks/amen.wav in this repo (the classic Amen break).
-//  strudel lowercases folder names, so `breaks:0` resolves to it.
+//  Loaded below via the github shortcut, pinned to a commit SHA so
+//  raw.githubusercontent's edge cache can't serve a stale strudel.json.
 // ════════════════════════════════════════════════════════════════════
 
+samples('github:setphen/samples/61db44e');
 const breakName = "breaks:0"; // Breaks/amen.wav
 
 // ── Prime cycle lengths (pairwise coprime) ──────────────────────────
