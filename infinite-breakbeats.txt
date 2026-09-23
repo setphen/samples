@@ -1,73 +1,66 @@
 // ════════════════════════════════════════════════════════════════════
 //  INFINITE BREAKBEATS — aperiodic mutations via prime-number cycles
 //  ───────────────────────────────────────────────────────────────────
-//  A single looping breakbeat is mutated forever. Transformations are
-//  gated on coprime (prime) cycle counts, so the joint "which effects
-//  are active + where they land" state has period = product of every
-//  prime used ≈ 7.4e12 cycles. At any realistic tempo that never
-//  repeats → the patch is effectively aperiodic.
+//  One clean looping breakbeat (the Amen break, fit to one cycle). On
+//  most cycles it plays intact; on cycles whose count is 0 mod a prime,
+//  a transformation fires. Because the primes are pairwise coprime, the
+//  constellation of active effects has period = product of all primes
+//  used ≈ 7.4e12 cycles → it never repeats. The break keeps its shape;
+//  the mutations are the event.
 //
-//  SAMPLE: Breaks/amen.wav in this repo (the classic Amen break).
-//  Loaded below via the github shortcut, pinned to a commit SHA so
-//  raw.githubusercontent's edge cache can't serve a stale strudel.json.
+//  SAMPLE: Breaks/amen.wav, loaded via the github shortcut pinned to a
+//  commit SHA so raw.githubusercontent's edge cache can't go stale.
 // ════════════════════════════════════════════════════════════════════
 
 samples('github:setphen/samples/61db44e');
 const breakName = "breaks:0"; // Breaks/amen.wav
 
 // ── Prime cycle lengths (pairwise coprime) ──────────────────────────
-// Each effect below fires only on cycles that are 0 mod its prime.
-// Because the primes share no common factor, the constellation of
-// active effects at any moment never recurs.
 const P = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43];
 
-// ── Effect palette. Index i is bound to prime P[i]. ─────────────────
-// Each fn maps a pattern -> mutated pattern. Patterns use `<...>`
-// step-sequencing so the effect itself also evolves across its cycles.
+// ── Effect palette. Index i fires on cycles where count % P[i] == 0. ─
+// Each fn maps a pattern -> mutated pattern. `<...>` steps let each
+// effect also evolve across its own rare activations.
 const fx = [
-  p => p.chop("<2 4 8 16 8 4>"),              // 2  — slice density
-  p => p.rev(),                               // 3  — full-bar reverse
-  p => p.speed("<0.5 0.75 1 1.5 2 1>"),       // 5  — pitch warp
-  p => p.crush("<16 8 4 8 16 32 16>"),        // 7  — bitcrush
-  p => p.shape("<0 0.3 0.6 0.3 0>"),          // 11 — waveshaper grit
-  p => p.lpf("<400 800 1600 4000 20000 4000>"),// 13 — lowpass sweep
-  p => p.hpf("<0 200 400 800 200 0>"),        // 17 — highpass thinned
-  p => p.pan("<0.2 0.5 0.8 0.5 0.2>"),        // 19 — stereo wander
-  p => p.delay("<0.2 0.4 0.7 0.4>").delaytime("<0.125 0.25 0.375>"), // 23 — echo
-  p => p.djf("<0.2 0.5 0.8 0.5 0.2>"),        // 29 — DJ filter
-  p => p.degradeBy("<0 0.25 0.5 0.25 0>"),    // 31 — dropout cuts
-  p => p.striate("<4 8 16 8 4>"),             // 37 — micro-stutter
-  p => p.jux(q => q.rev()),                   // 41 — channel-flipped reverse
-  p => p.palindrome(),                        // 43 — fwd/rev macro swing
+  p => p.chop("<2 4 8 16>"),                // 2  — slice into N pieces
+  p => p.rev(),                             // 3  — full-bar reverse
+  p => p.speed("<0.5 0.75 1.5 2>"),         // 5  — pitch warp
+  p => p.crush("<16 8 4>"),                 // 7  — bitcrush
+  p => p.shape("<0 0.3 0.6>"),              // 11 — waveshaper grit
+  p => p.lpf("<400 1600 4000 20000>"),      // 13 — lowpass sweep
+  p => p.hpf("<0 200 800>"),                // 17 — highpass thin
+  p => p.pan("<0.2 0.5 0.8>"),              // 19 — stereo wander
+  p => p.delay("<0.2 0.5>").delaytime("<0.125 0.25>"), // 23 — echo
+  p => p.djf("<0.2 0.5 0.8>"),              // 29 — DJ filter
+  p => p.degradeBy("<0 0.25 0.5>"),         // 31 — dropout cuts
+  p => p.striate("<4 8 16>"),               // 37 — micro-stutter
+  p => p.jux(q => q.rev()),                 // 41 — channel-flipped reverse
+  p => p.palindrome(),                      // 43 — fwd/rev macro swing
 ];
 
-// ── Base loop ───────────────────────────────────────────────────────
-// Always-on gentle variation: chop count wanders through primes, so
-// even a "plain" cycle is subtly re-sliced from bar to bar.
-let beat = s(breakName)
-  .chop("<2 3 5 7 11 13 17 19>")
-  .jux(q => q.off(0.5, r => r.rev()));   // lazy stereo shadow
+// ── Base loop: the break, once per cycle, fit to the tempo. ─────────
+// No always-on shredding — the break stays recognizable; the prime
+// effects above are what mutate it.
+let beat = s(breakName).fit();
 
 // ── Bind each effect to its prime cycle ─────────────────────────────
-// `every(n, fn)` applies fn on cycles where cycleCount % n == 0.
-// Sum of 1/P[i] ≈ 1.8, so ~1-2 effects co-active per bar on average,
-// with rare dense moments and plenty of breathing room.
+// Sum of 1/P[i] ≈ 1.8, so ~1-2 effects co-active per bar on average:
+// the break evolves constantly but is rarely buried.
 for (let i = 0; i < fx.length; i++) {
   beat = beat.every(P[i], fx[i]);
 }
 
-// ── Wandering "where" layer ─────────────────────────────────────────
-// `chunk(n, fn)` segments the bar into n slices and applies fn to one
-// slice per cycle, rotating through them (period n). Using primes for n
-// makes the slice position wander aperiodically relative to the on/off
-// gating above — the "where" never realigns with the "when".
+// ── Wandering "where" layer (also prime-gated, not constant) ────────
+// `chunk(n, fn)` segments the bar into n slices and rotates through one
+// per cycle. Gating it with `every` means the cut/flip only lands on
+// its prime cycle, so the "where" wanders aperiodically AND rarely.
 beat = beat
-  .chunk(P[2], q => q.gain(0))    // prime 5  — mute a wandering slice ("cut")
-  .chunk(P[3], q => q.rev())      // prime 7  — reverse a wandering slice ("flip")
-  .chunk(P[5], q => q.speed(2))   // prime 13 — pitch-shift a wandering slice
-  .chunk(P[6], q => q.crush(4));  // prime 17 — bitcrush a wandering slice
+  .every(P[2], p => p.chunk(P[5], q => q.gain(0)))    // mute a wandering slice
+  .every(P[3], p => p.chunk(P[6], q => q.rev()))      // reverse a wandering slice
+  .every(P[5], p => p.chunk(P[7], q => q.speed(2)))   // pitch a wandering slice
+  .every(P[6], p => p.chunk(P[8], q => q.crush(4)));  // crush a wandering slice
 
-// ── Macro structure: occasional tempo / drop events on big primes ──
+// ── Macro structure: rare tempo / drop events on big primes ────────
 beat = beat
   .every(47, p => p.slow(2).chop(16))      // half-time "down" bar
   .every(53, p => p.fast(2).chop(32))      // double-time roll
@@ -75,4 +68,4 @@ beat = beat
   .every(61, p => p.striate(16).rev());    // granular reverse burst
 
 // ── Output ──────────────────────────────────────────────────────────
-$: beat.struct("x*16");   // keep a steady 16th-note grid under the chaos
+$: beat;
