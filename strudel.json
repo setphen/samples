@@ -1,5 +1,8 @@
 {
   "_base": "https://raw.githubusercontent.com/setphen/samples/main/",
+  "breaks": [
+    "Breaks/amen.wav"
+  ],
   "bd": [
     "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BB_Electro1short.wav",
     "Legowelt%20Drumnibus%20Samplepack/Bassdrums/BD%20Drumaxia%20wav.wav",
