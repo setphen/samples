@@ -39,19 +39,6 @@ const fx = [
   p => p.palindrome(),                        // 43 — fwd/rev macro swing
 ];
 
-// ── Wandering "where" layer ─────────────────────────────────────────
-// Some effects don't just turn on/off — they target a moving slice of
-// the bar. The slice location is driven by a second prime so its
-// position is also aperiodic relative to the on/off gating above.
-const withinFx = [
-  // mute a wandering 1/P[j] window — a "cut"
-  (p, j) => p.whenMod(P[j], (P[j + 1] % P[j]),
-    q => q.within([0, 1 / P[j + 2]], r => r.silent())),
-  // reverse a wandering window — a "slice flip"
-  (p, j) => p.whenMod(P[j + 1], (P[j + 2] % P[j + 1]),
-    q => q.within([1 / P[j + 3], 2 / P[j + 3]], r => r.rev())),
-];
-
 // ── Base loop ───────────────────────────────────────────────────────
 // Always-on gentle variation: chop count wanders through primes, so
 // even a "plain" cycle is subtly re-sliced from bar to bar.
@@ -67,16 +54,22 @@ for (let i = 0; i < fx.length; i++) {
   beat = beat.every(P[i], fx[i]);
 }
 
-// ── Bind the wandering-window effects (reuse later primes) ──────────
-for (let k = 0; k < withinFx.length; k++) {
-  beat = withinFx[k](beat, k);   // uses primes P[k], P[k+1], P[k+2], ...
-}
+// ── Wandering "where" layer ─────────────────────────────────────────
+// `chunk(n, fn)` segments the bar into n slices and applies fn to one
+// slice per cycle, rotating through them (period n). Using primes for n
+// makes the slice position wander aperiodically relative to the on/off
+// gating above — the "where" never realigns with the "when".
+beat = beat
+  .chunk(P[2], q => q.gain(0))    // prime 5  — mute a wandering slice ("cut")
+  .chunk(P[3], q => q.rev())      // prime 7  — reverse a wandering slice ("flip")
+  .chunk(P[5], q => q.speed(2))   // prime 13 — pitch-shift a wandering slice
+  .chunk(P[6], q => q.crush(4));  // prime 17 — bitcrush a wandering slice
 
 // ── Macro structure: occasional tempo / drop events on big primes ──
 beat = beat
   .every(47, p => p.slow(2).chop(16))      // half-time "down" bar
   .every(53, p => p.fast(2).chop(32))      // double-time roll
-  .every(59, p => p.silent().solo())       // one-bar drop / silence
+  .every(59, p => p.mask("0"))             // one-bar drop / silence
   .every(61, p => p.striate(16).rev());    // granular reverse burst
 
 // ── Output ──────────────────────────────────────────────────────────
