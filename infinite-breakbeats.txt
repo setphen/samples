@@ -33,7 +33,7 @@ const fx = [
   p => p.pan("<0.2 0.5 0.8 0.5 0.2>"),        // 19 — stereo wander
   p => p.delay("<0.2 0.4 0.7 0.4>").delaytime("<0.125 0.25 0.375>"), // 23 — echo
   p => p.djf("<0.2 0.5 0.8 0.5 0.2>"),        // 29 — DJ filter
-  p => p.degrade("<0 0.25 0.5 0.25 0>"),      // 31 — dropout cuts
+  p => p.degradeBy("<0 0.25 0.5 0.25 0>"),    // 31 — dropout cuts
   p => p.striate("<4 8 16 8 4>"),             // 37 — micro-stutter
   p => p.jux(q => q.rev()),                   // 41 — channel-flipped reverse
   p => p.palindrome(),                        // 43 — fwd/rev macro swing
