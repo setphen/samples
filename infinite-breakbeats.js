@@ -1,0 +1,83 @@
+// ════════════════════════════════════════════════════════════════════
+//  INFINITE BREAKBEATS — aperiodic mutations via prime-number cycles
+//  ───────────────────────────────────────────────────────────────────
+//  A single looping breakbeat is mutated forever. Transformations are
+//  gated on coprime (prime) cycle counts, so the joint "which effects
+//  are active + where they land" state has period = product of every
+//  prime used ≈ 7.4e12 cycles. At any realistic tempo that never
+//  repeats → the patch is effectively aperiodic.
+//
+//  SAMPLE: Breaks/amen.wav in this repo (the classic Amen break).
+//  strudel lowercases folder names, so `breaks:0` resolves to it.
+// ════════════════════════════════════════════════════════════════════
+
+const breakName = "breaks:0"; // Breaks/amen.wav
+
+// ── Prime cycle lengths (pairwise coprime) ──────────────────────────
+// Each effect below fires only on cycles that are 0 mod its prime.
+// Because the primes share no common factor, the constellation of
+// active effects at any moment never recurs.
+const P = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43];
+
+// ── Effect palette. Index i is bound to prime P[i]. ─────────────────
+// Each fn maps a pattern -> mutated pattern. Patterns use `<...>`
+// step-sequencing so the effect itself also evolves across its cycles.
+const fx = [
+  p => p.chop("<2 4 8 16 8 4>"),              // 2  — slice density
+  p => p.rev(),                               // 3  — full-bar reverse
+  p => p.speed("<0.5 0.75 1 1.5 2 1>"),       // 5  — pitch warp
+  p => p.crush("<16 8 4 8 16 32 16>"),        // 7  — bitcrush
+  p => p.shape("<0 0.3 0.6 0.3 0>"),          // 11 — waveshaper grit
+  p => p.lpf("<400 800 1600 4000 20000 4000>"),// 13 — lowpass sweep
+  p => p.hpf("<0 200 400 800 200 0>"),        // 17 — highpass thinned
+  p => p.pan("<0.2 0.5 0.8 0.5 0.2>"),        // 19 — stereo wander
+  p => p.delay("<0.2 0.4 0.7 0.4>").delaytime("<0.125 0.25 0.375>"), // 23 — echo
+  p => p.djf("<0.2 0.5 0.8 0.5 0.2>"),        // 29 — DJ filter
+  p => p.degrade("<0 0.25 0.5 0.25 0>"),      // 31 — dropout cuts
+  p => p.striate("<4 8 16 8 4>"),             // 37 — micro-stutter
+  p => p.jux(q => q.rev()),                   // 41 — channel-flipped reverse
+  p => p.palindrome(),                        // 43 — fwd/rev macro swing
+];
+
+// ── Wandering "where" layer ─────────────────────────────────────────
+// Some effects don't just turn on/off — they target a moving slice of
+// the bar. The slice location is driven by a second prime so its
+// position is also aperiodic relative to the on/off gating above.
+const withinFx = [
+  // mute a wandering 1/P[j] window — a "cut"
+  (p, j) => p.whenMod(P[j], (P[j + 1] % P[j]),
+    q => q.within([0, 1 / P[j + 2]], r => r.silent())),
+  // reverse a wandering window — a "slice flip"
+  (p, j) => p.whenMod(P[j + 1], (P[j + 2] % P[j + 1]),
+    q => q.within([1 / P[j + 3], 2 / P[j + 3]], r => r.rev())),
+];
+
+// ── Base loop ───────────────────────────────────────────────────────
+// Always-on gentle variation: chop count wanders through primes, so
+// even a "plain" cycle is subtly re-sliced from bar to bar.
+let beat = s(breakName)
+  .chop("<2 3 5 7 11 13 17 19>")
+  .jux(q => q.off(0.5, r => r.rev()));   // lazy stereo shadow
+
+// ── Bind each effect to its prime cycle ─────────────────────────────
+// `every(n, fn)` applies fn on cycles where cycleCount % n == 0.
+// Sum of 1/P[i] ≈ 1.8, so ~1-2 effects co-active per bar on average,
+// with rare dense moments and plenty of breathing room.
+for (let i = 0; i < fx.length; i++) {
+  beat = beat.every(P[i], fx[i]);
+}
+
+// ── Bind the wandering-window effects (reuse later primes) ──────────
+for (let k = 0; k < withinFx.length; k++) {
+  beat = withinFx[k](beat, k);   // uses primes P[k], P[k+1], P[k+2], ...
+}
+
+// ── Macro structure: occasional tempo / drop events on big primes ──
+beat = beat
+  .every(47, p => p.slow(2).chop(16))      // half-time "down" bar
+  .every(53, p => p.fast(2).chop(32))      // double-time roll
+  .every(59, p => p.silent().solo())       // one-bar drop / silence
+  .every(61, p => p.striate(16).rev());    // granular reverse burst
+
+// ── Output ──────────────────────────────────────────────────────────
+$: beat.struct("x*16");   // keep a steady 16th-note grid under the chaos
